@@ -1,15 +1,19 @@
+#include "main.h"
 /*
- * makes system calls to builds/sendmidi_macos
+ * makes system calls to the specified sendmidi binary
  */
 void *sendMidi(int number, int value) {
-    char command[100];
+    char command[200];
     command[0] = '\0';
 
     char numberString[50];
     snprintf(numberString, 50, "%d", number);
 
-    const char *program = "builds/sendmidi_macos dev out cc ";
+    char *program = sendMidiPath;
     strcat(command, program);
+
+    char *options = " dev out cc ";
+    strcat(command, options);
     strcat(command, numberString);
 
     char *space = " ";

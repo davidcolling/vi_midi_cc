@@ -53,15 +53,18 @@ static node* activeFaders = NULL; // head of the linked list of active faders
 static int useActive = 0; // if 0, only selectedFader is used; if 1, the fader at each index contained in activeFaders is used
 static char* recordingRegister = NULL; // string holding the current key recording
 
+char *sendMidiPath;
+
 int main(int argc, char **argv) {
-    if (argc == 1) {
+    if (argc == 2) {
         resolution = 8;
-    } else if (argc == 2) {
-        resolution = atoi(argv[1]);
+    } else if (argc == 3) {
+        resolution = atoi(argv[2]);
     } else {
         printf("wrong number or arguments\n");
         return 1;
     }
+    sendMidiPath = argv[1];
 
     setUp();
 

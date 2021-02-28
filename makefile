@@ -8,9 +8,6 @@ term:
 main: term main.c list.c print.c sendmidi.c
 	$(CC) $(LIBS) $@.c -o ./builds/$@
 
-run: main
-	./builds/main 19
-
 db: main
 	$(CC) -g $(LIBS) main.c -o main
 	gdb ./builds/main
