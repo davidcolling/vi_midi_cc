@@ -12,7 +12,7 @@ void *sendMidi(int number, int value) {
     char *program = sendMidiPath;
     strcat(command, program);
 
-    char *options = " dev out cc ";
+    char *options = " dev IAC\ Driver cc ";
     strcat(command, options);
     strcat(command, numberString);
 
