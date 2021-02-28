@@ -24,5 +24,9 @@ Setup
 
 Usage
     * `builds/main <absolute path to SendMidi binary> <fader height>`
-
+    * Keys
+        - Navigation: h, j, k, l
+        - Move a fader: J, K
+        - Command line: :
+        - Quit command: :q
 
