@@ -9,7 +9,7 @@ Features
     * one vi-style key recording register for on-the-fly macros (more registers coming)
 
 Installation
-    * Dependency
+    * Install SendMidi - Thanks Geert!
         - [SendMidi](https://github.com/gbevin/sendmidi)
     * Building
         - `make main`
