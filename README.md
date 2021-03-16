@@ -24,6 +24,7 @@ Setup
 
 Usage
  - `builds/main <absolute path to SendMidi binary> <fader height>`
+    - eg `builds/main /usr/bin/sendmidi 20`
  - Keys
    - Navigation: h, j, k, l
    - Move a fader: J, K
