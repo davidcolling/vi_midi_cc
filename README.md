@@ -4,6 +4,8 @@ Visual MIDI CC
 A vi-like MIDI continuous controller
 ------------------------------------
 
+[demo](demo.gif)
+
 Features
  - sends 128 different midi cc values 
  - one vi-style key recording register for on-the-fly macros (more registers coming)
