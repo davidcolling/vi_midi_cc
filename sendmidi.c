@@ -1,4 +1,3 @@
-#include "main.h"
 /*
  * makes system calls to the specified sendmidi binary
  */
