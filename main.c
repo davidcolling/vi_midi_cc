@@ -34,6 +34,7 @@ void selectFaderRel(int offset);
 void selectFaderAbs(int index);
 void activateFader(int index);
 void moveFaderRelative(int index, int difference);
+void moveFaderAbsolute(int index, int value);
 void moveActive(int difference);
 
 // utilities
@@ -134,6 +135,12 @@ void handleKey(char input) {
                 moveActive(-1);
             }
 
+            break;
+        case 'H' :
+            moveFaderAbsolute(selectedFader, resolution - 1);
+            break;
+        case 'L' :
+            moveFaderAbsolute(selectedFader, 0);
             break;
         case 'j':
             selectFaderRel(colsOfFaders);
@@ -357,6 +364,20 @@ void moveFaderRelative(int index, int difference) {
         rmKnob(getY(index) + (resolution - (values[index] + difference) + (difference/abs(difference))), getX(index));
         printKnob(getY(index) + (resolution - (values[index] + difference)), getX(index));
         values[index] += difference;
+
+        pthread_t thread_id;
+        pthread_create(&thread_id, NULL, midiThread, NULL);
+    }
+}
+
+/*
+ * changes the continuous control value at index to value
+ */
+void moveFaderAbsolute(int index, int value) {
+    if (0 <= value && value <= resolution - 1) {
+        rmKnob(getY(index) + (resolution - values[index]), getX(index));
+        printKnob(getY(index) + (resolution - value), getX(index));
+        values[index] = value;
 
         pthread_t thread_id;
         pthread_create(&thread_id, NULL, midiThread, NULL);
