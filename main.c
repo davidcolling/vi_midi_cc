@@ -33,7 +33,7 @@ int getY(int index);
 void selectFaderRel(int offset);
 void selectFaderAbs(int index);
 void activateFader(int index);
-void moveFader(int index, int difference);
+void moveFaderRelative(int index, int difference);
 void moveActive(int difference);
 
 // utilities
@@ -120,7 +120,7 @@ void handleKey(char input) {
             takeCommand();
             break;
         case 'K' :
-            moveFader(selectedFader, 1);
+            moveFaderRelative(selectedFader, 1);
 
             if (useActive == 1) {
                 moveActive(1);
@@ -128,7 +128,7 @@ void handleKey(char input) {
 
             break;
         case 'J' :
-            moveFader(selectedFader, -1);
+            moveFaderRelative(selectedFader, -1);
 
             if (useActive == 1) {
                 moveActive(-1);
@@ -352,7 +352,7 @@ void activateFader(int index) {
 /*
  * changes the continuous control value at index by difference and prints the new fader position
  */
-void moveFader(int index, int difference) {
+void moveFaderRelative(int index, int difference) {
     if (0 <= (values[index] + difference) && (values[index] + difference) <= resolution - 1) {
         rmKnob(getY(index) + (resolution - (values[index] + difference) + (difference/abs(difference))), getX(index));
         printKnob(getY(index) + (resolution - (values[index] + difference)), getX(index));
@@ -370,14 +370,14 @@ void moveActive(int difference) {
     if (activeFaders != NULL) {
         node *current = activeFaders;
         if ((int) current->value != selectedFader) {
-            moveFader((int) current->value, difference);
+            moveFaderRelative((int) current->value, difference);
         }
     
         while (current->next != NULL) {
             current = current->next;
 
             if ((int) current->value != selectedFader) {
-                moveFader((int) current->value, difference);
+                moveFaderRelative((int) current->value, difference);
             }
         }
     }
