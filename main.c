@@ -361,9 +361,9 @@ void activateFader(int index) {
  */
 void moveFaderRelative(int index, int difference) {
     if (0 <= (values[index] + difference) && (values[index] + difference) <= resolution - 1) {
-        rmKnob(getY(index) + (resolution - (values[index] + difference) + (difference/abs(difference))), getX(index));
-        printKnob(getY(index) + (resolution - (values[index] + difference)), getX(index));
+        rmKnob(getY(index) + (resolution - values[index]), getX(index));
         values[index] += difference;
+        printKnob(getY(index) + (resolution - values[index]), getX(index));
 
         pthread_t thread_id;
         pthread_create(&thread_id, NULL, midiThread, NULL);
@@ -376,8 +376,8 @@ void moveFaderRelative(int index, int difference) {
 void moveFaderAbsolute(int index, int value) {
     if (0 <= value && value <= resolution - 1) {
         rmKnob(getY(index) + (resolution - values[index]), getX(index));
-        printKnob(getY(index) + (resolution - value), getX(index));
         values[index] = value;
+        printKnob(getY(index) + (resolution - value), getX(index));
 
         pthread_t thread_id;
         pthread_create(&thread_id, NULL, midiThread, NULL);
