@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
 
     setUp();
 
-    keepRunning = getch();
+    keepRunning = '1';
     while (keepRunning) {
         keepRunning = getch();
         handleKey(keepRunning);
