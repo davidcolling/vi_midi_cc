@@ -139,6 +139,9 @@ void handleKey(char input) {
         case 'H' :
             moveFaderAbsolute(selectedFader, resolution - 1);
             break;
+        case 'M' :
+            moveFaderAbsolute(selectedFader, resolution / 2);
+            break;
         case 'L' :
             moveFaderAbsolute(selectedFader, 0);
             break;
