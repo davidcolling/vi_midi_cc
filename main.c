@@ -230,6 +230,7 @@ int quit() {
  */
 void *midiThread() {
     sendMidi(selectedFader, floor(127 * ((double) values[selectedFader] / (double) resolution)));
+    return NULL;
 }
 
 /*
