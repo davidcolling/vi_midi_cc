@@ -210,14 +210,12 @@ int quit() {
 
     FILE *fp = fopen("./values.txt","w");
 
-    if (fp == NULL) {
-        printf("unable to open values.txt");
-    } else {
+    if (fp != NULL) {
         for (int i = 0; i < controllerSize; i++) {
             fprintf(fp, "%d ", values[i]);
         }
-        fclose(fp);
     }
+    fclose(fp);
 
     freeList(activeFaders);
 
