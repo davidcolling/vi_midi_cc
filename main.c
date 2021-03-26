@@ -217,7 +217,9 @@ int quit() {
     }
     fclose(fp);
 
-    freeList(activeFaders);
+    if (activeFaders != NULL) {
+        freeList(activeFaders);
+    }
 
     free(values);
     free(recordingRegister);
