@@ -1,7 +1,7 @@
 /*
  * makes system calls to the specified sendmidi binary
  */
-void *sendMidi(int number, int value) {
+void sendMidi(int number, int value) {
     char command[200];
     command[0] = '\0';
 
