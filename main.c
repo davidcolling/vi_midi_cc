@@ -302,7 +302,7 @@ void takeRecording() {
     // null-terminate the string
     char *tmp = realloc(recordingRegister, charCount);
     recordingRegister = tmp;
-    recordingRegister[charCount] = NULL;
+    recordingRegister[charCount] = '\0';
 
     printCommandLine();
 }
