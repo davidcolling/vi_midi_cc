@@ -92,11 +92,32 @@ void setUp() {
 
     values = malloc(controllerSize * sizeof(int));
 
+    char ch, file_name[25];
+    FILE *fp;
+
+    fp = fopen("./values.txt", "r"); 
+
+    if (fp == NULL) {
+       perror("No values.txt found\n");
+    } else {
+        for (int i = 0; i < controllerSize; i++) {
+            char valueString[3];
+            int charCount = 0;
+            while ((ch = fgetc(fp)) != EOF && ch != ' ') {
+                valueString[charCount] = ch;
+                charCount++;
+            }
+            values[i] = atoi(valueString);
+        }
+    }
+    fclose(fp);
+
     char faderNumberOutputString[128];
 
     for (int i = 0; i < controllerSize; i++) {
         snprintf(faderNumberOutputString, 128, "%d", i);
         printFader(getX(i), getY(i), resolution, faderNumberOutputString);
+        printKnob(getY(i) + (resolution - values[i]), getX(i));
     }
 }
 
@@ -157,11 +178,11 @@ void handleKey(char input) {
         case 'l':
             selectFaderRel(1); 
             break;
-    	case 'G':
-    	    selectFaderAbs(controllerSize - 1);
+        case 'G':
+            selectFaderAbs(controllerSize - 1);
             break;
-    	case 'g':
-    	    selectFaderAbs(0);
+        case 'g':
+            selectFaderAbs(0);
             break;
         case 'a':
             activateFader(selectedFader);
@@ -183,22 +204,18 @@ void handleKey(char input) {
 int quit() {
     endwin();
 
-    if (activeFaders != NULL) {
-        FILE *fp = fopen("./active.txt","w");
+    FILE *fp = fopen("./values.txt","w");
 
-        if (fp == NULL) {
-            printf("unable to open active.txt");
-        } else {
-            node *current = activeFaders;
-            while (current->next != NULL) {
-                fprintf(fp, "%d ", current->value);
-                current = current->next;
-            }
-            fclose(fp);
+    if (fp == NULL) {
+        printf("unable to open values.txt");
+    } else {
+        for (int i = 0; i < controllerSize; i++) {
+            fprintf(fp, "%d ", values[i]);
         }
-
-        freeList(activeFaders);
+        fclose(fp);
     }
+
+    freeList(activeFaders);
 
     free(values);
     free(recordingRegister);
