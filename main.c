@@ -92,20 +92,24 @@ void setUp() {
 
     values = malloc(controllerSize * sizeof(int));
 
-    char ch, file_name[25];
+    char ch;
     FILE *fp;
 
     fp = fopen("./values.txt", "r"); 
 
-    if (fp == NULL) {
-       perror("No values.txt found\n");
-    } else {
+    if (fp != NULL) {
         for (int i = 0; i < controllerSize; i++) {
             char valueString[3];
             int charCount = 0;
             while ((ch = fgetc(fp)) != EOF && ch != ' ') {
                 valueString[charCount] = ch;
                 charCount++;
+            }
+            if (ch == ' ') {
+                while(charCount < 3) {
+                    valueString[charCount] = ' ';
+                    charCount++;
+                }
             }
             values[i] = atoi(valueString);
         }
