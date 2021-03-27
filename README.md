@@ -32,7 +32,9 @@ Usage
     - eg `builds/main /usr/bin/sendmidi 20`
  - Keys
    - Navigation: h, j, k, l
-   - Move a fader: J, K
+   - Move a fader
+     - Realtively: J, K
+     - Absolutely: H, M, L
    - Command line: :
    - Quit command: :q
 
