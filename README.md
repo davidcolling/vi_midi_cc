@@ -4,11 +4,12 @@ Visual MIDI CC
 A vi-like MIDI continuous controller
 ------------------------------------
 
-[demo](demo.gif)
+![demo](demo.gif)
 
 Features
  - sends 128 different midi cc values 
  - one vi-style key recording register for on-the-fly macros (more registers coming)
+ - saves and opens cc values to and from ./values.txt
 
 Installation
  - Install SendMidi - Thanks Geert!
