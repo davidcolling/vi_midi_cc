@@ -111,7 +111,12 @@ void setUp() {
                     charCount++;
                 }
             }
-            values[i] = atoi(valueString);
+            int value = atoi(valueString);
+            if (value < resolution) {
+                values[i] = value;
+            } else {
+                values[i] = resolution - 1;
+            }
         }
     }
     fclose(fp);
