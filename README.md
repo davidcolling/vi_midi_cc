@@ -36,5 +36,7 @@ Usage
      - Relatively: J, K
      - Absolutely: H, M, L
    - Command line: :
+   - Start, stop recording: q
+   - Play recording: @
    - Quit command: :q
 
