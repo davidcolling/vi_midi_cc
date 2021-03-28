@@ -36,7 +36,10 @@ Usage
      - Relatively: J, K
      - Absolutely: H, M, L
    - Command line: :
+   - Quit command: :q
+   - Yank (copy) fader value: y
+   - Delete (cut) fader value: x
+   - Put (paste) fader value: p
    - Start, stop recording: q
    - Play recording: @
-   - Quit command: :q
 
