@@ -24,6 +24,9 @@ void *midiThread();
 void takeCommand();
 void takeRecording();
 void playRecording();
+void yankValue();
+void deleteValue();
+void putValue();
 
 // for determining where each fader goes
 int getX(int index);
@@ -53,6 +56,7 @@ static int resolution; // number of positions on each fader
 static node* activeFaders = NULL; // head of the linked list of active faders
 static int useActive = 0; // if 0, only selectedFader is used; if 1, the fader at each index contained in activeFaders is used
 static char* recordingRegister = NULL; // string holding the current key recording
+static int yankRegister;
 
 char *sendMidiPath;
 
@@ -193,6 +197,15 @@ void handleKey(char input) {
         case 'g':
             selectFaderAbs(0);
             break;
+        case 'y':
+            yankValue();
+            break;
+        case 'x':
+            deleteValue();
+            break;
+        case 'p':
+            putValue();
+            break;
         case 'a':
             activateFader(selectedFader);
             break;
@@ -327,6 +340,28 @@ void playRecording() {
     for (int i = 0; i < strlen(recordingRegister); i++) {
         handleKey(recordingRegister[i]);
     }
+}
+
+/* 
+ * yanks selected fader's value and copies to yankRegister
+ */
+void yankValue() {
+    yankRegister = values[selectedFader];
+}
+
+/* 
+ * deletes selected fader's value and copies to yankRegister
+ */
+void deleteValue() {
+    yankRegister = values[selectedFader];
+    moveFaderAbsolute(selectedFader, 0);
+}
+
+/*
+ * changes selected fader's value to the value in yankRegister
+ */
+void putValue() {
+    moveFaderAbsolute(selectedFader, yankRegister);
 }
 
 /*
