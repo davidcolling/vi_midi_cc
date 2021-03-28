@@ -33,7 +33,7 @@ Usage
  - Keys
    - Navigation: h, j, k, l
    - Move a fader
-     - Realtively: J, K
+     - Relatively: J, K
      - Absolutely: H, M, L
    - Command line: :
    - Quit command: :q
