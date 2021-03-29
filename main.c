@@ -45,7 +45,7 @@ int isInt(char const* input);
 char* itoa(int val, int base);
 
 static short keepRunning; // controls the main loop. program ends when set to 0
-static int *values; // first element array of faders represented by their current continuous control value 
+static int* values; // first element array of faders represented by their current continuous control value 
 static int selectedFader = 0; // contains the index of the fader that is currently active
 static int controllerSize; // the number of faders == the number of ints stored in values array
 int rows; // the number of rows of characters on the screen
@@ -56,7 +56,7 @@ static int resolution; // number of positions on each fader
 static node* activeFaders = NULL; // head of the linked list of active faders
 static int useActive = 0; // if 0, only selectedFader is used; if 1, the fader at each index contained in activeFaders is used
 static char* recordingRegister = NULL; // string holding the current key recording
-static int yankRegister;
+static int* yankRegister;
 
 char *sendMidiPath;
 
@@ -95,6 +95,7 @@ void setUp() {
     controllerSize = rowsOfFaders * colsOfFaders;
 
     values = malloc(controllerSize * sizeof(int));
+    yankRegister = malloc(controllerSize * sizeof(int));
 
     char ch;
     FILE *fp;
@@ -346,14 +347,14 @@ void playRecording() {
  * yanks selected fader's value and copies to yankRegister
  */
 void yankValue() {
-    yankRegister = values[selectedFader];
+    *yankRegister = values[selectedFader];
 }
 
 /* 
  * deletes selected fader's value and copies to yankRegister
  */
 void deleteValue() {
-    yankRegister = values[selectedFader];
+    yankValue();
     moveFaderAbsolute(selectedFader, 0);
 }
 
@@ -361,7 +362,7 @@ void deleteValue() {
  * changes selected fader's value to the value in yankRegister
  */
 void putValue() {
-    moveFaderAbsolute(selectedFader, yankRegister);
+    moveFaderAbsolute(selectedFader, yankRegister[0]);
 }
 
 /*
