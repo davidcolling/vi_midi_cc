@@ -6,11 +6,10 @@ void printFader(int x, int y, int resolution, char *id);
 void printCommandLine();
 void printMessage(char *message);
 void markSelected(int y, int x);
-void unMarkSelected(int y, int x);
+void unMark(int y, int x);
 void printKnob(int y, int x);
 void rmKnob(int y, int x);
 void markActive(int y, int x);
-void unMarkActive(int y, int x);
 
 /*
  * prints one fader at the coordinate x, y
@@ -68,7 +67,7 @@ void markSelected(int y, int x) {
 /*
  * visually indicates the fader at index is not selected
  */
-void unMarkSelected(int y, int x) {
+void unMark(int y, int x) {
     move(y, x);
     for (int i = 0; i < 5; i++)
         addch('-');
@@ -107,11 +106,3 @@ void markActive(int y, int x) {
         addch(':');
 }
 
-/*
- * visually indicates the fader at index is not active
- */
-void unMarkActive(int y, int x) {
-    move(y, x);
-    for (int i = 0; i < 5; i++)
-        addch('-');
-}

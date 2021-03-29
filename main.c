@@ -399,7 +399,7 @@ void selectFaderRel(int offset) {
 void selectFaderAbs(int index) {
     void *faderPointer = selectedFader;
     if (!(activeFaders != NULL && contains(activeFaders, faderPointer)))
-        unMarkSelected(getY(selectedFader), getX(selectedFader));
+        unMark(getY(selectedFader), getX(selectedFader));
     selectedFader = index;
     markSelected(getY(selectedFader), getX(selectedFader));
 }
@@ -417,7 +417,7 @@ void activateFader(int index) {
             markActive(getY(index), getX(index));
         } else {
             activeFaders = rmNode(activeFaders, faderPointer);
-            unMarkActive(getY(index), getX(index));
+            unMark(getY(index), getX(index));
         }
     }
 }
