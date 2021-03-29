@@ -65,7 +65,16 @@ void markSelected(int y, int x) {
 }
 
 /*
- * visually indicates the fader at index is not selected
+ * visually indicates the fader at index is selected with ':::::' at the top of the fader
+ */
+void markVisual(int y, int x) {
+    move(y, x);
+    for (int i = 0; i < 5; i++)
+        addch('.');
+}
+
+/*
+ * visually indicates the fader at index is not selected or active
  */
 void unMark(int y, int x) {
     move(y, x);
